@@ -51,6 +51,9 @@
     </font>
     <br>
     <img width="960" src="./xslim_files/figs/fig_display.png" alt="X-Slim display">
+    <p style="text-align:center;">
+      X-Slim accelerates image and video generation with negligible quality degradation.
+    </p>
   </div>
 
   <div class="container" id="main">
@@ -77,13 +80,13 @@
         <p style="margin-top:80px;">(2) Pure timestep reuse can quickly cross a quality threshold, while only refreshing blocks or tokens leaves speed on the table.<br><br><b>How can we harness the benefits of aggressive step-level and conservative block/token reuse to achieve maximal speed while preserving quality?</b></p>
       </div>
     </div>
-    <p style="text-align:center; margin-top:10px;">
-      Analysis of feature similarity across step-level and block-level dimensions
-    </p>
-    <div style="display:flex; justify-content:center; gap:16px; flex-wrap:wrap;">
+    <div style="margin-top:10px; display:flex; justify-content:center; gap:16px; flex-wrap:wrap;">
       <img style="max-width:48%; min-width:320px;" src="./xslim_files/figs/fig_step.png" alt="step-level analysis">
       <img style="max-width:48%; min-width:320px;" src="./xslim_files/figs/fig_block.png" alt="block-level analysis">
     </div>
+    <p style="text-align:center;">
+      Analysis of feature similarity across step-level and block-level dimensions
+    </p>
   </div>
   <!-- <div class="content">
     <h2><b>Motivation</b></h2>
@@ -115,24 +118,34 @@
   <div class="content">
     <h2><b>Qualitative Comparison</b></h2>
     <p>Across text-to-image and text-to-video tasks, qualitative comparison shows that our proposed X-Slim produces sharper structures and more consistent details than competing baselines with a higher speedup.</p>
-    <h3 style="text-align:left;"><b>Comparison on FLUX.1-dev</b></h2>
+    <h3 style="text-align:left;"><b>Comparison on FLUX.1-dev</b></h3>
     <div style="text-align: center;">
-      <img width="800" src="./xslim_files/figs/fig_img_compare.png" alt="Qualitative comparison of image">
+      <img width="980" src="./xslim_files/figs/fig_flux.png" alt="Qualitative comparison of image">
     </div>
-    <h3 style="text-align:left;"><b>Comparison on HunyuanVideo</b></h2>
-    <div style="text-align: center;">
-      <img width="960" src="./xslim_files/figs/fig_video_compare.png" alt="Qualitative comparison of video">
+    <h3 style="text-align:left;"><b>Comparison on HunyuanVideo</b></h3>
+    <div style="overflow-x:auto; padding:10px 0;">
+      <div style="display:flex; gap:12px; align-items:flex-start; min-width: 980px;">
+        <img src="./xslim_files/figs/fig_hy1.png" alt="Qualitative comparison of video 1" style="height:580px; flex:0 0 auto;">
+        <img src="./xslim_files/figs/fig_hy2.png" alt="Qualitative comparison of video 2" style="height:580px; flex:0 0 auto;">
+        <img src="./xslim_files/figs/fig_hy3.png" alt="Qualitative comparison of video 3" style="height:580px; flex:0 0 auto;">
+        <img src="./xslim_files/figs/fig_hy4.png" alt="Qualitative comparison of video 3" style="height:580px; flex:0 0 auto;">
+      </div>
     </div>
   </div>
   
   <div class="content">
     <h2><b>Quantitative Evaluation</b></h2>
     <p>Quantitative evaluation proves that our proposed X-Slim achieves the best speed–quality trade-off across tasks. Reported results show up to 4.97x and 3.52x latency reductions on FLUX.1-dev and HunyuanVideo, and 3.13x speedup with a lower FID of 2.42 on DiT-XL/2.</p>
+    <h3 style="text-align:left;"><b>Evaluation on FLUX.1-dev & DiT-XL/2</b></h3>
     <div style="text-align: center;">
-      <img width="960" src="./xslim_files/figs/fig_eval_t2i.png" alt="Quantitative results t2i">
+      <img width="960" src="./xslim_files/figs/fig_eval_flux.png" alt="Quantitative results t2i">
     </div>
-        <div style="text-align: center;">
-      <img width="960" src="./xslim_files/figs/fig_eval_t2v.png" alt="Quantitative results t2v">
+    <h3 style="text-align:left;"><b>Evaluation on HunyuanVideo</b></h3>
+    <div style="text-align: center;">
+      <img width="960" src="./xslim_files/figs/fig_eval_hy.png" alt="Quantitative results t2v">
+    </div>
+      <div style="text-align: center;">
+      <img width="960" src="./xslim_files/figs/fig_eval_hy2.png" alt="Quantitative results t2v">
     </div>
   </div>
   
