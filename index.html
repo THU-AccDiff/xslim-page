@@ -27,15 +27,26 @@
   </script>
 </head>
 <body>
-  <div class="content">
-    <h1><strong><span style="color:#e17055">X-Slim</span></strong></h1>
-    <p style="text-align: center; font-weight: bold; font-size: 1.2em">No Cache Left Idle: Accelerating Diffusion Model via Extreme-Slimming Caching</p>
-    <p id="authors" style="text-align: center;">Anonymous CVPR 2026 Submission</p>
-    <p id="authors" style="text-align: center;">Paper ID *****</p>
+    <div class="content">
+    <div style="display:flex; align-items:center; justify-content:center; gap:14px; margin-top:12px;">
+      <img src="./xslim_files/figs/rocket.png" alt="X-Slim rocket" style="height:72px; filter: drop-shadow(0 0 10px rgba(255,255,255,0.45));">
+      <h1 style="margin:0; font-family:'Georgia','Times New Roman',serif; font-weight:800; letter-spacing:2px; text-shadow:0 0 12px rgba(255,255,255,0.4);">
+        <span style="color:#fd2554">X</span>
+        <span style="color:#fff06a">-</span>
+        <span style="color:#f1853c">S</span>
+        <span style="color:#3df364">l</span>
+        <span style="color:#69eeff">i</span>
+        <span style="color:#ff47e0">m</span>
+      </h1>
+    </div>
+    <p style="text-align: center; font-family:'Georgia','Times New Roman',serif; font-weight: 700; font-size: 1.2em; margin: 8px 0 12px;">No Cache Left Idle: Accelerating Diffusion Model via Extreme-Slimming Caching</p>
+    <p id="authors" style="text-align: center; font-family:'Times New Roman','Georgia',serif; font-weight: 700; margin: 4px 0 6px; font-size: 18px;"><b>Tingyan Wen<sup>1*</sup></b>, <b>Haoyu Li<sup>1*</sup></b>, <b>Yihuang Chen<sup>2&dagger;</sup></b>, <b>Xing Zhou<sup>2</sup></b>, <b>Lifei Zhu<sup>2</sup></b>, <b>XueQian Wang<sup>1&dagger;</sup></b></p>
+    <p id="authors" style="text-align: center; font-family:'Times New Roman','Georgia',serif; margin: 4px 0 4px; font-size: 16px;"> <b><sup>1</sup> Tsinghua University</b> &nbsp;&nbsp; <b><sup>2</sup> Central Media Technology Institute, Huawei</b></p>
+    <p style="text-align: center; font-family:'Times New Roman','Georgia',serif; margin: 4px 0 10px; font-size: 15px; font-weight: 600;">(<sup>*</sup> Equal Contribution &nbsp; <sup>&dagger;</sup> Corresponding Author)</p>
     <font size="+2">
       <p style="text-align: center;">
-        <a href="./No_Cache_Left_Idle__Accelerating_diffusion_model_via_Extreme_Slimming_Caching.pdf" target="_blank"><b>[PDF]</b></a> &nbsp;&nbsp;&nbsp;&nbsp;
-        <b>[Code: TBD]</b>
+        <a href="./No_Cache_Left_Idle__Accelerating_diffusion_model_via_Extreme_Slimming_Caching.pdf" target="_blank"><b>[Paper(TODO)]</b></a> &nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="https://github.com/THU-AccDiff/xslim/" target="_blank"><b>[Code]</b></a>
       </p>
     </font>
     <br>
@@ -52,7 +63,7 @@
 
   <div class="content">
     <h2 style="text-align:center;"><b>Abstract</b></h2>
-    <p>Diffusion models deliver strong generative quality, but inference cost scales with timestep count, model depth, and token length. Feature caching reuses nearby computations, yet aggressive timestep skipping often hurts fidelity while conservative block or token refresh yields limited speedup. We present <b>X-Slim</b> (eXtreme-Slimming Caching), a training-free, cache-based accelerator that jointly exploits redundancy across temporal, structural, and spatial dimensions. X-Slim introduces a dual-threshold push-then-polish controller: it first pushes timestep-level reuse up to an early-warning line, then polishes residual error with lightweight block- and token-level refresh; a critical line triggers full inference to reset error. Level-specific, context-aware indicators guide when and where to cache, shrinking search overhead. On FLUX.1-dev and HunyuanVideo, X-Slim reduces latency by up to 4.97x and 3.52x with minimal perceptual loss, and on DiT-XL/2 it reaches 3.13x acceleration with a FID improvement of 2.42 over prior methods.</p>
+    <p>Diffusion models deliver strong generative quality, but inference cost scales with timestep count, model depth, and token length. Feature caching reuses nearby computations, yet aggressive timestep skipping often hurts fidelity while conservative block or token refresh yields limited speedup. We present <b>X-Slim</b> (e<b>X</b>treme-<b>Slim</b>ming Caching), a training-free, cache-based accelerator that jointly exploits redundancy across temporal, structural, and spatial dimensions. X-Slim introduces a dual-threshold <b>push-then-polish</b> controller: it first pushes timestep-level reuse up to an early-warning line, then polishes residual error with lightweight block- and token-level refresh; a critical line triggers full inference to reset error. Level-specific, context-aware indicators guide when and where to cache, shrinking search overhead. On FLUX.1-dev and HunyuanVideo, X-Slim reduces latency by up to 4.97x and 3.52x with minimal perceptual loss, and on DiT-XL/2 it reaches 3.13x acceleration with a FID improvement of 2.42 over prior methods.</p>
   </div>
 
   <div class="content">
