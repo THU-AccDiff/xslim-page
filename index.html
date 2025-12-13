@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <title>X-Slim</title>
+  <link rel="stylesheet" href="./xslim_files/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./xslim_files/css/dics.min.css">
+  <link rel="stylesheet" href="./xslim_files/css/bulma.min.css">
+  <link rel="stylesheet" href="./xslim_files/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./xslim_files/css/index.css">
+  <link rel="stylesheet" href="./xslim_files/css/style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="./xslim_files/js/bulma-carousel.min.js"></script>
+  <script src="./xslim_files/js/index.js"></script>
+  <script src="./xslim_files/js/dics.min.js"></script>
+  <script>
+      document.addEventListener('DOMContentLoaded', domReady);
+      function domReady() {
+          for (const e of document.querySelectorAll(".b-dics")) {
+              new Dics({
+                  container: e,
+                  textPosition: "top"
+              });
+          }
+      }
+  </script>
+</head>
+<body>
+  <div class="content">
+    <h1><strong><span style="color:#e17055">X-Slim</span></strong></h1>
+    <p style="text-align: center; font-weight: bold; font-size: 1.2em">No Cache Left Idle: Accelerating Diffusion Model via Extreme-Slimming Caching</p>
+    <p id="authors" style="text-align: center;">Anonymous CVPR 2026 Submission</p>
+    <p id="authors" style="text-align: center;">Paper ID *****</p>
+    <font size="+2">
+      <p style="text-align: center;">
+        <a href="./No_Cache_Left_Idle__Accelerating_diffusion_model_via_Extreme_Slimming_Caching.pdf" target="_blank"><b>[PDF]</b></a> &nbsp;&nbsp;&nbsp;&nbsp;
+        <b>[Code: TBD]</b>
+      </p>
+    </font>
+    <br>
+    <img width="960" src="./xslim_files/figs/fig_display.png" alt="X-Slim display">
+  </div>
+
+  <div class="container" id="main">
+    <div class="content">
+      <video muted loop playsinline controls width="1024px">
+        <source src="./xslim_files/vids/xslim_demo.mp4" type="video/mp4">
+      </video>
+    </div>
+  </div>
+
+  <div class="content">
+    <h2 style="text-align:center;"><b>Abstract</b></h2>
+    <p>Diffusion models deliver strong generative quality, but inference cost scales with timestep count, model depth, and token length. Feature caching reuses nearby computations, yet aggressive timestep skipping often hurts fidelity while conservative block or token refresh yields limited speedup. We present <b>X-Slim</b> (eXtreme-Slimming Caching), a training-free, cache-based accelerator that jointly exploits redundancy across temporal, structural, and spatial dimensions. X-Slim introduces a dual-threshold push-then-polish controller: it first pushes timestep-level reuse up to an early-warning line, then polishes residual error with lightweight block- and token-level refresh; a critical line triggers full inference to reset error. Level-specific, context-aware indicators guide when and where to cache, shrinking search overhead. On FLUX.1-dev and HunyuanVideo, X-Slim reduces latency by up to 4.97x and 3.52x with minimal perceptual loss, and on DiT-XL/2 it reaches 3.13x acceleration with a FID improvement of 2.42 over prior methods.</p>
+  </div>
+
+  <div class="content">
+    <h2><b>Motivation</b></h2>
+    <p>(1) Inference-time redundancy appears in three dimensions: many iterative timesteps, deep stacks of Transformer blocks, and long token sequences at high resolution. Adjacent timesteps show strong feature similarity across all levels!
+      
+      <b>Is it possible to remove redundancy across temporal, structural, and spatial dimensions via caching?</b>
+    </p>
+    <div style="text-align: center;">
+      <img width="540" src="./xslim_files/figs/fig_motivation_a.png" alt="Inference-time computational cost">
+    </div>
+    <br>
+    <p>(2) Pure timestep reuse can quickly cross a quality threshold, while only refreshing blocks or tokens leaves speed on the table.
+      
+      <b>How can we harness the benefits of aggressive step-level and conservative block/token reuse to achieve maximal speed while preserving quality?</b></p>
+    <div style="text-align: center;">
+      <img width="540" src="./xslim_files/figs/fig_motivation_b.png" alt="Cache-based accelerator">
+    </div>
+    <!-- <div style="display:flex; justify-content:center; gap:16px; flex-wrap:wrap;">
+      <img style="max-width:48%; min-width:320px;" src="./xslim_files/figs/fig_motivation_a.png" alt="Inference-time computational cost">
+      <img style="max-width:48%; min-width:320px;" src="./xslim_files/figs/fig_motivation_b.png" alt="Cache-based accelerator">
+    </div> -->
+    
+  </div>
+  
+  <div class="content">
+    <h2><b>Methodology</b></h2>
+    <div style="text-align: center;">
+      <img width="960" src="./xslim_files/figs/fig_framework.png" alt="X-Slim framework">
+    </div>
+    <p><b>Push-then-Polish Caching.</b> Rather than a direct mixture, X-Slim introduces a push-then-polish caching paradigm, exploiting cachable redundancy across temporal, structural, and spatial dimensions. Step-level reuse is pushed until an early-warning line, then polished with partial refresh (blocks/tokens). A critical line triggers a full step to reset accumulated error.</p>
+    <p><b>Level-specific Strategy.</b> Different levels exhibit distinct reuse dynamics. Adjacent steps follow a U-shaped pattern and are weakly prompt dependent. Block sensitivity varies with depth yet follows a consistent depth-wise pattern across timesteps. Tokens are largely content dependent. Building on these properties, X-Slim adopts a hybrid level-specific strategy that plays to each level's strengths.</p>
+    <div style="display:flex; justify-content:center; gap:16px; flex-wrap:wrap;">
+      <img style="max-width:48%; min-width:320px;" src="./xslim_files/figs/fig_step.png" alt="step-level analysis">
+      <img style="max-width:48%; min-width:320px;" src="./xslim_files/figs/fig_block.png" alt="block-level analysis">
+    </div>
+  </div>
+  
+  <div class="content">
+    <h2><b>Qualitative Comparison</b></h2>
+    <p>Across text-to-image and text-to-video tasks, qualitative comparison shows that our proposed X-Slim produces sharper structures and more consistent details than competing baselines with a higher speedup.</p>
+    <h3 style="text-align:left;"><b>Comparison on FLUX.1-dev</b></h2>
+    <div style="text-align: center;">
+      <img width="800" src="./xslim_files/figs/fig_img_compare.png" alt="Qualitative comparison of image">
+    </div>
+    <h3 style="text-align:left;"><b>Comparison on HunyuanVideo</b></h2>
+    <div style="text-align: center;">
+      <img width="960" src="./xslim_files/figs/fig_video_compare.png" alt="Qualitative comparison of video">
+    </div>
+  </div>
+  
+  <div class="content">
+    <h2><b>Quantitative Evaluation</b></h2>
+    <p>Quantitative evaluation proves that our proposed X-Slim achieves the best speed–quality trade-off across tasks. Reported results show up to 4.97x and 3.52x latency reductions on FLUX.1-dev and HunyuanVideo, and 3.13x speedup with a lower FID of 2.42 on DiT-XL/2.</p>
+    <div style="text-align: center;">
+      <img width="960" src="./xslim_files/figs/fig_eval_t2i.png" alt="Quantitative results t2i">
+    </div>
+        <div style="text-align: center;">
+      <img width="960" src="./xslim_files/figs/fig_eval_t2v.png" alt="Quantitative results t2v">
+    </div>
+  </div>
+  
+  <div class="content">
+    <h2>BibTex</h2>
+    <p>If you find this work helpful, please cite:</p>
+    <div class="row">
+      <pre>
+@article{xslim2026,
+  title={No Cache Left Idle: Accelerating Diffusion Model via Extreme-Slimming Caching},
+  author={Anonymous},
+  journal={CVPR Submission},
+  year={2026}
+}
+      </pre>
+    </div>
+  </div>
+
+  <div class="content">
+    <p>Project page template is borrowed from <a href="http://haonanqiu.com/projects/FreeScale.html">FreeScale</a>.</p>
+  </div>
+</body>
+</html>
