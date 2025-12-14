@@ -1,171 +1,310 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
+  <!-- Preconnect for performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://ajax.googleapis.com">
+  <link rel="preconnect" href="https://documentcloud.adobe.com">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+
+
+  <!-- TODO: Replace with your paper title and authors -->
   <title>X-Slim</title>
-  <link rel="stylesheet" href="./xslim_files/css/bootstrap.min.css">
-  <link rel="stylesheet" href="./xslim_files/css/dics.min.css">
-  <link rel="stylesheet" href="./xslim_files/css/bulma.min.css">
-  <link rel="stylesheet" href="./xslim_files/css/bulma-carousel.min.css">
-  <link rel="stylesheet" href="./xslim_files/css/index.css">
-  <link rel="stylesheet" href="./xslim_files/css/style.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="./xslim_files/js/bulma-carousel.min.js"></script>
-  <script src="./xslim_files/js/index.js"></script>
-  <script src="./xslim_files/js/dics.min.js"></script>
-  <script>
-      document.addEventListener('DOMContentLoaded', domReady);
-      function domReady() {
-          for (const e of document.querySelectorAll(".b-dics")) {
-              new Dics({
-                  container: e,
-                  textPosition: "top"
-              });
-          }
-      }
-  </script>
+  
+  <!-- Favicon and App Icons -->
+  <link rel="icon" type="image/x-icon" href="xslim_files/figs/rocket.png">
+  <link rel="apple-touch-icon" href="xslim_files/figs/rocket.png">
+  
+  <!-- Critical CSS - Load synchronously -->
+  <link rel="stylesheet" href="xslim_files/css/bulma.min.css">
+  <link rel="stylesheet" href="xslim_files/css/index.css">
+  
+  <!-- Non-critical CSS - Load asynchronously -->
+  <link rel="preload" href="xslim_files/css/bulma-carousel.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="xslim_files/css/bulma-slider.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="xslim_files/css/fontawesome.all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  
+  <!-- Fallback for browsers that don't support preload -->
+  <noscript>
+    <link rel="stylesheet" href="xslim_files/css/bulma-carousel.min.css">
+    <link rel="stylesheet" href="xslim_files/css/bulma-slider.min.css">
+    <link rel="stylesheet" href="xslim_files/css/fontawesome.all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  </noscript>
+  
+  <!-- Fonts - Optimized loading -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Defer non-critical JavaScript -->
+  <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="xslim_files/js/fontawesome.all.min.js"></script>
+  <script defer src="xslim_files/js/bulma-carousel.min.js"></script>
+  <script defer src="xslim_files/js/bulma-slider.min.js"></script>
+  <script defer src="xslim_files/js/index.js"></script>
+
+  <style>
+    :root { --maxw: 980px; }
+    body { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+    .container.is-max-desktop { max-width: var(--maxw) !important; }
+    .section { padding: 2.25rem 1.25rem; }
+    .publication-title { line-height: 1.15; }
+    .hero.is-light { background: #f7f7f8; }
+    .btn-gap { gap: 0.75rem; flex-wrap: wrap; }
+    .media-frame { border-radius: 16px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.10); background: #fff; }
+    .img-responsive { width: 100%; height: auto; display: block; }
+    .tight { margin-top: 0.25rem; margin-bottom: 0.25rem; }
+    .authors { font-weight: 600; }
+    .aff { font-weight: 600; }
+    .small-note { font-size: 0.95rem; opacity: 0.9; }
+    .section-title { margin-bottom: 0.75rem; text-align: center; }
+    pre { border-radius: 14px; }
+  </style>
 </head>
+
 <body>
-    <div class="content">
-    <div style="display:flex; align-items:center; justify-content:center; gap:14px; margin-top:12px;">
-      <img src="./xslim_files/figs/rocket.png" alt="X-Slim rocket" style="height:72px; filter: drop-shadow(0 0 10px rgba(255,255,255,0.45));">
-      <h1 style="margin:0; font-weight:800; letter-spacing:0.8px; text-shadow:0 0 12px rgba(255,255,255,0.4);">
-        <span style="color:#fd2554">X</span>
-        <span style="color:#fce72b">-</span>
-        <span style="color:#ff7e29">S</span>
-        <span style="color:#02ff38">l</span>
-        <span style="color:#3585fc">i</span>
-        <span style="color:#fd30b9">m</span>
-      </h1>
+
+  <!-- Scroll to Top Button -->
+  <button class="scroll-to-top" onclick="scrollToTop()" title="Scroll to top" aria-label="Scroll to top">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <!-- Header / Hero -->
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+
+            <!-- Logo + X-Slim colorful title -->
+            <div style="display:flex; align-items:center; justify-content:center; gap:14px; margin-top:6px; margin-bottom:10px;">
+              <img src="./xslim_files/figs/rocket.png" alt="X-Slim rocket" style="height:72px;">
+              <h1 class="title is-1" style="margin:0; font-weight:800; letter-spacing:0.8px;">
+                <span style="color:#fd2554">X</span>
+                <span style="color:#fce72b">-</span>
+                <span style="color:#ff7e29">S</span>
+                <span style="color:#02ff38">l</span>
+                <span style="color:#3585fc">i</span>
+                <span style="color:#fd30b9">m</span>
+              </h1>
+            </div>
+
+            <h1 class="title is-2 publication-title">
+              No Cache Left Idle: Accelerating Diffusion Model via Extreme-Slimming Caching
+            </h1>
+
+            <p class="authors tight">
+              Tingyan Wen<sup>1*</sup>, Haoyu Li<sup>1*</sup>, Yihuang Chen<sup>2&dagger;</sup>,
+              Xing Zhou<sup>2</sup>, Lifei Zhu<sup>2</sup>, XueQian Wang<sup>1&dagger;</sup>
+            </p>
+            <p class="aff tight">
+              <sup>1</sup> Tsinghua University &nbsp;&nbsp; <sup>2</sup> Central Media Technology Institute, Huawei
+            </p>
+            <p class="small-note tight">
+              (<sup>*</sup> Equal Contribution &nbsp; <sup>&dagger;</sup> Corresponding Author)
+            </p>
+
+            <!-- Links -->
+            <div class="buttons is-centered btn-gap" style="margin-top:14px;">
+              <a class="button is-dark is-rounded" href="./No_Cache_Left_Idle__Accelerating_diffusion_model_via_Extreme_Slimming_Caching.pdf" target="_blank">
+                <span class="icon">
+                  <i class="ai ai-arxiv"></i>
+                </span>
+                <span>Paper (TODO)</span>
+              </a>
+              <a class="button is-dark is-rounded" href="https://github.com/THU-AccDiff/xslim/" target="_blank" rel="noopener">
+                <span class="icon">
+                  <i class="fab fa-github"></i>
+                </span>
+                <span>Code</span>
+              </a>
+            </div>
+
+            <div class="media-frame" style="margin-top:20px;">
+              <img class="img-responsive" src="./xslim_files/figs/fig_display.png" alt="X-Slim display">
+            </div>
+            <p class="has-text-centered" style="margin-top:12px;">
+              X-Slim accelerates image and video generation with negligible quality degradation.
+            </p>
+
+          </div>
+        </div>
+      </div>
     </div>
-    <h1><strong>No Cache Left Idle: Accelerating Diffusion Model via Extreme-Slimming Caching</strong></h1>
-    <p id="authors" style="text-align: center; font-weight: 700; margin: 4px 0 6px; font-size: 18px;"><b>Tingyan Wen<sup>1*</sup></b>, <b>Haoyu Li<sup>1*</sup></b>, <b>Yihuang Chen<sup>2&dagger;</sup></b>, <b>Xing Zhou<sup>2</sup></b>, <b>Lifei Zhu<sup>2</sup></b>, <b>XueQian Wang<sup>1&dagger;</sup></b></p>
-    <p id="authors" style="text-align: center; margin: 4px 0 4px; font-size: 16px;"> <b><sup>1</sup> Tsinghua University</b> &nbsp;&nbsp; <b><sup>2</sup> Central Media Technology Institute, Huawei</b></p>
-    <p style="text-align: center; margin: 4px 0 10px; font-size: 15px; font-weight: 600;">(<sup>*</sup> Equal Contribution &nbsp; <sup>&dagger;</sup> Corresponding Author)</p>
-    <font size="+2">
-      <p style="text-align: center;">
-        <a href="./No_Cache_Left_Idle__Accelerating_diffusion_model_via_Extreme_Slimming_Caching.pdf" target="_blank"><b>[Paper(TODO)]</b></a> &nbsp;&nbsp;&nbsp;&nbsp;
-        <a href="https://github.com/THU-AccDiff/xslim/" target="_blank"><b>[Code]</b></a>
+  </section>
+
+  <!-- Demo Video -->
+  <section class="section">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3 section-title">🎥 Demo Video</h2>
+      <div class="media-frame">
+        <video muted loop playsinline controls preload="metadata" style="width:100%; height:auto; display:block;">
+          <source src="./xslim_files/vids/xslim_demo.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+  </section>
+
+  <!-- Abstract -->
+  <section class="section hero is-light">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3 section-title">📝 Abstract</h2>
+      <div class="content">
+        <p>
+          Diffusion models deliver strong generative quality, but inference cost scales with timestep count, model depth, and token length. Feature caching reuses nearby computations, yet aggressive timestep skipping often hurts fidelity while conservative block or token refresh yields limited speedup. We present <b>X-Slim</b> (e<b>X</b>treme-<b>Slim</b>ming Caching), a training-free, cache-based accelerator that jointly exploits redundancy across temporal, structural, and spatial dimensions. X-Slim introduces a dual-threshold <b>push-then-polish</b> controller: it first pushes timestep-level reuse up to an early-warning line, then polishes residual error with lightweight block- and token-level refresh; a critical line triggers full inference to reset error. Level-specific, context-aware indicators guide when and where to cache, shrinking search overhead. On FLUX.1-dev and HunyuanVideo, X-Slim reduces latency by up to 4.97x and 3.52x with minimal perceptual loss, and on DiT-XL/2 it reaches 3.13x acceleration with a FID improvement of 2.42 over prior methods.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Motivation -->
+  <section class="section">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3 section-title">💡 Motivation</h2>
+
+      <div class="columns is-variable is-6 is-vcentered">
+        <div class="column is-6">
+          <div class="media-frame" style="transform: scale(0.8); transform-origin: center;">
+            <img class="img-responsive" src="./xslim_files/figs/fig_motivation.png" alt="Motivation figure">
+          </div>
+        </div>
+        <div class="column is-6 content">
+          <p style="margin-top:0;">
+            (1) Inference-time redundancy appears in three dimensions: many iterative timesteps, deep stacks of Transformer blocks, and long token sequences at high resolution. Adjacent timesteps show strong feature similarity across all levels!
+            <br><br>
+            <b>🌟 Is it possible to remove redundancy across temporal, structural, and spatial dimensions via caching?</b>
+          </p>
+
+          <p style="margin-top:50px;">
+            (2) Pure timestep reuse can quickly cross a quality threshold, while only refreshing blocks or tokens leaves speed on the table.
+            <br><br>
+            <b>🌟 How can we harness the benefits of aggressive step-level and conservative block/token reuse to achieve maximal speed while preserving quality?</b>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Methodology -->
+  <section class="section hero is-light">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3 section-title">🛠️ Methodology</h2>
+
+      <div class="columns is-variable is-5">
+        <div class="column">
+          <div class="media-frame">
+            <img class="img-responsive" src="./xslim_files/figs/fig_step.png" alt="Step-level analysis">
+          </div>
+        </div>
+        <div class="column">
+          <div class="media-frame">
+            <img class="img-responsive" src="./xslim_files/figs/fig_block.png" alt="Block-level analysis">
+          </div>
+        </div>
+      </div>
+
+      <p class="has-text-centered">
+        Analysis of feature similarity across step-level and block-level dimensions
       </p>
-    </font>
-    <br>
-    <img width="960" src="./xslim_files/figs/fig_display.png" alt="X-Slim display">
-    <p style="text-align:center;">
-      X-Slim accelerates image and video generation with negligible quality degradation.
-    </p>
-  </div>
 
-  <div class="container" id="main">
-    <div class="content">
-      <h2 style="text-align:left;"><b>🎥Demo Video</b></h2>
-      <video muted loop playsinline controls width="1024px">
-        <source src="./xslim_files/vids/xslim_demo.mp4" type="video/mp4">
-      </video>
-    </div>
-  </div>
+      <div class="content " style="margin-top:16px;">
+        <p><b>Push-then-Polish Caching.</b> Rather than a direct mixture, X-Slim introduces a push-then-polish caching paradigm, exploiting cachable redundancy across temporal, structural, and spatial dimensions. Step-level reuse is pushed until an early-warning line, then polished with partial refresh (blocks/tokens). A critical line triggers a full step to reset accumulated error.</p>
+        <p><b>Level-specific Strategy.</b> Different levels exhibit distinct reuse dynamics. Adjacent steps follow a U-shaped pattern and are weakly prompt dependent. Block sensitivity varies with depth yet follows a consistent depth-wise pattern across timesteps. Tokens are largely content dependent. Building on these properties, X-Slim adopts a hybrid level-specific strategy that plays to each level's strengths.</p>
+      </div>
 
-  <div class="content">
-    <h2 style="text-align:center;"><b>Abstract</b></h2>
-    <p>Diffusion models deliver strong generative quality, but inference cost scales with timestep count, model depth, and token length. Feature caching reuses nearby computations, yet aggressive timestep skipping often hurts fidelity while conservative block or token refresh yields limited speedup. We present <b>X-Slim</b> (e<b>X</b>treme-<b>Slim</b>ming Caching), a training-free, cache-based accelerator that jointly exploits redundancy across temporal, structural, and spatial dimensions. X-Slim introduces a dual-threshold <b>push-then-polish</b> controller: it first pushes timestep-level reuse up to an early-warning line, then polishes residual error with lightweight block- and token-level refresh; a critical line triggers full inference to reset error. Level-specific, context-aware indicators guide when and where to cache, shrinking search overhead. On FLUX.1-dev and HunyuanVideo, X-Slim reduces latency by up to 4.97x and 3.52x with minimal perceptual loss, and on DiT-XL/2 it reaches 3.13x acceleration with a FID improvement of 2.42 over prior methods.</p>
-  </div>
-  <div class="content">
-    <h2><b>Motivation</b></h2>
-    <div style="display:flex; gap:24px; align-items:flex-start; flex-wrap:wrap; margin-top:12px;">
-      <div style="flex:1 1 380px; text-align:center;">
-        <img style="width:100%; max-width:520px;" src="./xslim_files/figs/fig_motivation.png" alt="Inference-time computational cost and cache-based accelerator">
-      </div>
-      <div style="flex:1 1 380px;">
-        <p style="margin-top:0;">(1) Inference-time redundancy appears in three dimensions: many iterative timesteps, deep stacks of Transformer blocks, and long token sequences at high resolution. Adjacent timesteps show strong feature similarity across all levels!<br><br><b>Is it possible to remove redundancy across temporal, structural, and spatial dimensions via caching?</b></p>
-        <p style="margin-top:80px;">(2) Pure timestep reuse can quickly cross a quality threshold, while only refreshing blocks or tokens leaves speed on the table.<br><br><b>How can we harness the benefits of aggressive step-level and conservative block/token reuse to achieve maximal speed while preserving quality?</b></p>
+      <div class="media-frame" style="margin-top:14px;">
+        <img class="img-responsive" src="./xslim_files/figs/fig_framework.png" alt="X-Slim framework">
       </div>
     </div>
-    <div style="margin-top:10px; display:flex; justify-content:center; gap:16px; flex-wrap:wrap;">
-      <img style="max-width:48%; min-width:320px;" src="./xslim_files/figs/fig_step.png" alt="step-level analysis">
-      <img style="max-width:48%; min-width:320px;" src="./xslim_files/figs/fig_block.png" alt="block-level analysis">
-    </div>
-    <p style="text-align:center;">
-      Analysis of feature similarity across step-level and block-level dimensions
-    </p>
-  </div>
-  <!-- <div class="content">
-    <h2><b>Motivation</b></h2>
-    <p>(1) Inference-time redundancy appears in three dimensions: many iterative timesteps, deep stacks of Transformer blocks, and long token sequences at high resolution. Adjacent timesteps show strong feature similarity across all levels!
-      
-      <b>Is it possible to remove redundancy across temporal, structural, and spatial dimensions via caching?</b>
-    </p>
-    <div style="text-align: center;">
-      <img width="540" src="./xslim_files/figs/fig_motivation_a.png" alt="Inference-time computational cost">
-    </div>
-    <br>
-    <p>(2) Pure timestep reuse can quickly cross a quality threshold, while only refreshing blocks or tokens leaves speed on the table.
-      
-      <b>How can we harness the benefits of aggressive step-level and conservative block/token reuse to achieve maximal speed while preserving quality?</b></p>
-    <div style="text-align: center;">
-      <img width="540" src="./xslim_files/figs/fig_motivation_b.png" alt="Cache-based accelerator">
-    </div>
-  </div> -->
-  
-  <div class="content">
-    <h2><b>Methodology</b></h2>
-    <p><b>Push-then-Polish Caching.</b> Rather than a direct mixture, X-Slim introduces a push-then-polish caching paradigm, exploiting cachable redundancy across temporal, structural, and spatial dimensions. Step-level reuse is pushed until an early-warning line, then polished with partial refresh (blocks/tokens). A critical line triggers a full step to reset accumulated error.</p>
-    <p><b>Level-specific Strategy.</b> Different levels exhibit distinct reuse dynamics. Adjacent steps follow a U-shaped pattern and are weakly prompt dependent. Block sensitivity varies with depth yet follows a consistent depth-wise pattern across timesteps. Tokens are largely content dependent. Building on these properties, X-Slim adopts a hybrid level-specific strategy that plays to each level's strengths.</p>
-    <div style="text-align: center;">
-      <img width="960" src="./xslim_files/figs/fig_framework.png" alt="X-Slim framework">
-    </div>
-  </div>
-  
-  <div class="content">
-    <h2><b>Qualitative Comparison</b></h2>
-    <p>Across text-to-image and text-to-video tasks, qualitative comparison shows that our proposed X-Slim produces sharper structures and more consistent details than competing baselines with a higher speedup.</p>
-    <h3 style="text-align:left;"><b>Comparison on FLUX.1-dev</b></h3>
-    <div style="text-align: center;">
-      <img width="980" src="./xslim_files/figs/fig_flux.png" alt="Qualitative comparison of image">
-    </div>
-    <h3 style="text-align:left;"><b>Comparison on HunyuanVideo</b></h3>
-    <div style="overflow-x:auto; padding:10px 0;">
-      <div style="display:flex; gap:12px; align-items:flex-start; min-width: 980px;">
-        <img src="./xslim_files/figs/fig_hy1.png" alt="Qualitative comparison of video 1" style="height:580px; flex:0 0 auto;">
-        <img src="./xslim_files/figs/fig_hy2.png" alt="Qualitative comparison of video 2" style="height:580px; flex:0 0 auto;">
-        <img src="./xslim_files/figs/fig_hy3.png" alt="Qualitative comparison of video 3" style="height:580px; flex:0 0 auto;">
-        <img src="./xslim_files/figs/fig_hy4.png" alt="Qualitative comparison of video 3" style="height:580px; flex:0 0 auto;">
+  </section>
+
+  <!-- Qualitative -->
+  <section class="section">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3 section-title">🖼️ Qualitative Comparison</h2>
+      <div class="content">
+        <p>
+          Across text-to-image and text-to-video tasks, qualitative comparison shows that our proposed X-Slim produces sharper structures and more consistent details than competing baselines with a higher speedup.
+        </p>
+      </div>
+
+      <h3 class="title is-4" style="margin-top:1.25rem;">Comparison on FLUX.1-dev</h3>
+      <div class="media-frame">
+        <img class="img-responsive" src="./xslim_files/figs/fig_flux.png" alt="Qualitative comparison on FLUX.1-dev">
+      </div>
+
+      <h3 class="title is-4" style="margin-top:1.75rem;">Comparison on HunyuanVideo</h3>
+      <div class="media-frame" style="overflow-x:auto;">
+        <div style="display:flex; gap:12px; align-items:flex-start; min-width: 980px; padding:12px;">
+          <img src="./xslim_files/figs/fig_hy1.png" alt="HunyuanVideo qualitative 1" style="height:590px; flex:0 0 auto;">
+          <img src="./xslim_files/figs/fig_hy2.png" alt="HunyuanVideo qualitative 2" style="height:590px; flex:0 0 auto;">
+          <img src="./xslim_files/figs/fig_hy3.png" alt="HunyuanVideo qualitative 3" style="height:590px; flex:0 0 auto;">
+          <img src="./xslim_files/figs/fig_hy4.png" alt="HunyuanVideo qualitative 4" style="height:590px; flex:0 0 auto;">
+        </div>
       </div>
     </div>
-  </div>
-  
-  <div class="content">
-    <h2><b>Quantitative Evaluation</b></h2>
-    <p>Quantitative evaluation proves that our proposed X-Slim achieves the best speed–quality trade-off across tasks. Reported results show up to 4.97x and 3.52x latency reductions on FLUX.1-dev and HunyuanVideo, and 3.13x speedup with a lower FID of 2.42 on DiT-XL/2.</p>
-    <h3 style="text-align:left;"><b>Evaluation on FLUX.1-dev & DiT-XL/2</b></h3>
-    <div style="text-align: center;">
-      <img width="960" src="./xslim_files/figs/fig_eval_flux.png" alt="Quantitative results t2i">
+  </section>
+
+  <!-- Quantitative -->
+  <section class="section hero is-light">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3 section-title">📊 Quantitative Evaluation</h2>
+
+      <div class="content">
+        <p>
+          Quantitative evaluation proves that our proposed X-Slim achieves the best speed–quality trade-off across tasks. Reported results show up to 4.97x and 3.52x latency reductions on FLUX.1-dev and HunyuanVideo, and 3.13x speedup with a lower FID of 2.42 on DiT-XL/2.
+        </p>
+      </div>
+
+      <h3 class="title is-4" style="margin-top:1.25rem;">Evaluation on FLUX.1-dev &amp; DiT-XL/2</h3>
+      <div class="media-frame">
+        <img class="img-responsive" src="./xslim_files/figs/fig_eval_flux.png" alt="Quantitative results on FLUX.1-dev & DiT-XL/2">
+      </div>
+
+      <h3 class="title is-4" style="margin-top:1.75rem;">Evaluation on HunyuanVideo</h3>
+      <div class="media-frame" style="margin-bottom:14px;">
+        <img class="img-responsive" src="./xslim_files/figs/fig_eval_hy.png" alt="Quantitative results on HunyuanVideo 1">
+      </div>
+      <div class="media-frame">
+        <img class="img-responsive" src="./xslim_files/figs/fig_eval_hy2.png" alt="Quantitative results on HunyuanVideo 2">
+      </div>
     </div>
-    <h3 style="text-align:left;"><b>Evaluation on HunyuanVideo</b></h3>
-    <div style="text-align: center;">
-      <img width="960" src="./xslim_files/figs/fig_eval_hy.png" alt="Quantitative results t2v">
-    </div>
-      <div style="text-align: center;">
-      <img width="960" src="./xslim_files/figs/fig_eval_hy2.png" alt="Quantitative results t2v">
-    </div>
-  </div>
-  
-  <div class="content">
-    <h2>BibTex</h2>
-    <p>If you find this work helpful, please cite:</p>
-    <div class="row">
-      <pre>
-@article{xslim2026,
+  </section>
+
+  <!-- BibTeX -->
+  <section class="section" id="bibtex">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3 section-title">📚 BibTeX</h2>
+      <div class="content">
+        <p>If you find this work helpful, please cite:</p>
+<pre><code>@article{xslim2026,
   title={No Cache Left Idle: Accelerating Diffusion Model via Extreme-Slimming Caching},
   author={Anonymous},
   journal={CVPR Submission},
   year={2026}
-}
-      </pre>
+}</code></pre>
+      </div>
     </div>
-  </div>
+  </section>
 
-  <div class="content">
-    <p>Project page template is borrowed from <a href="http://haonanqiu.com/projects/FreeScale.html">FreeScale</a>.</p>
-  </div>
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container is-max-desktop">
+      <div class="content has-text-centered">
+          <p>
+            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+            You are free to borrow the source code of this website, we just ask that you link back to this page in the footer. <br> This website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+
+      </div>
+    </div>
+  </footer>
+
 </body>
 </html>
